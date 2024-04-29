@@ -32,7 +32,7 @@ Este comando limpa o diretório `target`, compila seu projeto e empacota o proje
 Após construir o projeto, você pode executá-lo usando:
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.yourpackage.Main"
+mvn exec:java -Dexec.mainClass="poo.tp.Main"
 ```
 
 Substitua `com.yourpackage.Main` pela classe principal do seu projeto. Alternativamente, se o projeto estiver empacotado como um jar, você pode executá-lo com:
