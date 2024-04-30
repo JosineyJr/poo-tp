@@ -6,12 +6,20 @@ import poo.tp.domain.users.model.Person;
 
 public interface PersonRepository {
   /**
-   * Saves or updates person in the database.
+   * Creates a person in the database.
    *
    * @param person the person entity to save or update
    * @return the saved or updated person entity
    */
-  Person save(Person person);
+  Person create(Person person);
+
+  /**
+   * Updates a person in the database.
+   *
+   * @param person the person entity to save or update
+   * @return the saved or updated person entity
+   */
+  Person update(Person person);
 
   /**
    * Deletes the person from the database.

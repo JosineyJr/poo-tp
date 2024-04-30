@@ -1,6 +1,7 @@
 package poo.tp.application.mapper;
 
 import poo.tp.application.dto.users.CreatePersonDto;
+import poo.tp.application.dto.users.PersonDto;
 import poo.tp.domain.users.model.Person;
 
 public class PersonMapper {
@@ -20,7 +21,7 @@ public class PersonMapper {
    * @param person the person entity to map
    * @return the mapped person dto
    */
-  public static CreatePersonDto mapPersonEntityToPersonDto(Person person) {
-    return new CreatePersonDto(person.getFirstName(), person.getLastName(), person.getCPF());
+  public static PersonDto mapPersonEntityToPersonDto(Person person) {
+    return new PersonDto(person.getID(), person.getFirstName(), person.getLastName());
   }
 }
