@@ -59,4 +59,19 @@ public class PersonService {
 
     return personDto;
   }
+
+  /**
+   * Deletes a person in the database.
+   * 
+   * @param id the person id to delete
+   */
+  public void deletePerson(String ID) {
+    Optional<Person> personEntity = personRepository.findByID(ID);
+
+    if (!personEntity.isPresent()) {
+      throw new UserNotFoundException("Person not found with ID: " + ID);
+    }
+
+    personRepository.delete(ID);
+  }
 }

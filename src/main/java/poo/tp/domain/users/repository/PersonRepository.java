@@ -26,7 +26,7 @@ public interface PersonRepository {
    *
    * @param person the person entity to delete
    */
-  void delete(Person person);
+  void delete(String ID);
 
   /**
    * Finds a person by its ID.
