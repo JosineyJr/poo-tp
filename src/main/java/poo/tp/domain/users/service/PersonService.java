@@ -2,7 +2,7 @@ package poo.tp.domain.users.service;
 
 import poo.tp.domain.users.exception.UserNotFoundException;
 import poo.tp.domain.users.model.Person;
-import poo.tp.domain.users.repository.PersonRepository;
+import poo.tp.domain.users.repository.IPersonRepository;
 
 import java.util.Optional;
 
@@ -12,9 +12,9 @@ import poo.tp.application.dto.users.UpdatePersonDto;
 import poo.tp.application.mapper.PersonMapper;
 
 public class PersonService {
-  private final PersonRepository personRepository;
+  private final IPersonRepository personRepository;
 
-  public PersonService(PersonRepository personRepository) {
+  public PersonService(IPersonRepository personRepository) {
     this.personRepository = personRepository;
   }
 

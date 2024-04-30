@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import poo.tp.domain.users.model.Person;
 
-public interface PersonRepository {
+public interface IPersonRepository {
   /**
    * Creates a person in the database.
    *
