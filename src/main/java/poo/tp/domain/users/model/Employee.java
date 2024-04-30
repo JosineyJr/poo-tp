@@ -2,7 +2,7 @@ package poo.tp.domain.users.model;
 
 import poo.tp.domain.auth.model.Role;
 
-public class Employee extends Person{
+public class Employee extends Person {
   private Role role;
 
   public Employee(String ID, String firstName, String lastName, String CPF, Role role) {
@@ -19,10 +19,14 @@ public class Employee extends Person{
     return role;
   }
 
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
   @Override
   public String toString() {
     return "Employee{" +
-            "role=" + role +
-            '}';
+        "role=" + role +
+        '}';
   }
 }

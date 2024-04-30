@@ -17,6 +17,11 @@ public class ClientService {
     this.clientRepository = clientRepository;
   }
 
+  /**
+   * Create a new client.
+   * 
+   * @param createClientDto
+   */
   public void create(CreateClientDto createClientDto) {
     Client clientFound = clientRepository.findByCPF(createClientDto.getCPF());
 
@@ -27,6 +32,11 @@ public class ClientService {
     clientRepository.create(clientFound);
   }
 
+  /**
+   * Update a client.
+   * 
+   * @param updateClientDto
+   */
   public void update(UpdateClientDto updateClientDto) {
     Client clientFound = clientRepository.findByID(updateClientDto.getID());
 
@@ -41,6 +51,11 @@ public class ClientService {
     clientRepository.update(clientFound);
   }
 
+  /**
+   * Delete a client.
+   * 
+   * @param deleteClientDto
+   */
   public void delete(DeleteClientDto deleteClientDto) {
     Client clientFound = clientRepository.findByID(deleteClientDto.getID());
 
@@ -51,6 +66,12 @@ public class ClientService {
     clientRepository.delete(clientFound.getID());
   }
 
+  /**
+   * Find a client by ID.
+   * 
+   * @param ID
+   * @return ClientDto
+   */
   public ClientDto findByID(String ID) {
     Client clientFound = clientRepository.findByID(ID);
 
@@ -71,6 +92,11 @@ public class ClientService {
     return ClientMapper.mapClientEntityToClientDto(clientFound);
   }
 
+  /**
+   * Find all clients.
+   * 
+   * @return Iterable<ClientDto>
+   */
   public Iterable<ClientDto> findAll() {
     Iterable<Client> clients = clientRepository.findAll();
 
