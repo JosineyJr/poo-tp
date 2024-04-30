@@ -1,5 +1,8 @@
 package poo.tp.application.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import poo.tp.application.dto.users.CreatePersonDto;
 import poo.tp.application.dto.users.PersonDto;
 import poo.tp.domain.users.model.Person;
@@ -23,5 +26,15 @@ public class PersonMapper {
    */
   public static PersonDto mapPersonEntityToPersonDto(Person person) {
     return new PersonDto(person.getID(), person.getFirstName(), person.getLastName());
+  }
+
+  public static Iterable<PersonDto> mapPersonEntitiesToPersonDtos(Iterable<Person> persons) {
+    List<PersonDto> personDtos = new ArrayList<PersonDto>();
+
+    for (Person person : persons) {
+      personDtos.add(mapPersonEntityToPersonDto(person));
+    }
+
+    return personDtos;
   }
 }

@@ -74,4 +74,57 @@ public class PersonService {
 
     personRepository.delete(ID);
   }
+
+  /**
+   * Finds a person by its ID.
+   * 
+   * @param ID the ID of the person to find
+   * @return the person dto with the given ID
+   */
+  public PersonDto findPersonByID(String ID) {
+    Optional<Person> personEntity = personRepository.findByID(ID);
+
+    if (!personEntity.isPresent()) {
+      throw new UserNotFoundException("Person not found with ID: " + ID);
+    }
+
+    Person person = personEntity.get();
+
+    PersonDto personDto = PersonMapper.mapPersonEntityToPersonDto(person);
+
+    return personDto;
+  }
+
+  /**
+   * Finds a person by its CPF.
+   * 
+   * @param CPF the CPF of the person to find
+   * @return the person dto with the given CPF
+   */
+  public PersonDto findPersonByCPF(String CPF) {
+    Optional<Person> personEntity = personRepository.findByCPF(CPF);
+
+    if (!personEntity.isPresent()) {
+      throw new UserNotFoundException("Person not found with CPF: " + CPF);
+    }
+
+    Person person = personEntity.get();
+
+    PersonDto personDto = PersonMapper.mapPersonEntityToPersonDto(person);
+
+    return personDto;
+  }
+
+  /**
+   * Finds all persons in the database.
+   * 
+   * @return an iterable of all person dtos
+   */
+  public Iterable<PersonDto> findAllPersons() {
+    Iterable<Person> personEntities = personRepository.findAll();
+
+    Iterable<PersonDto> personDtos = PersonMapper.mapPersonEntitiesToPersonDtos(personEntities);
+
+    return personDtos;
+  }
 }

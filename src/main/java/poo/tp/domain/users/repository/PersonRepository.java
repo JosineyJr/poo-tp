@@ -45,14 +45,6 @@ public interface PersonRepository {
   Optional<Person> findByCPF(String CPF);
 
   /**
-   * Finds a person by its email.
-   *
-   * @param email the email of the person to find
-   * @return the person entity with the given email
-   */
-  Optional<Person> findByEmail(String email);
-
-  /**
    * Finds all persons in the database.
    *
    * @return an iterable of all person entities
