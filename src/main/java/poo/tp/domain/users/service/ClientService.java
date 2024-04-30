@@ -1,0 +1,79 @@
+package poo.tp.domain.users.service;
+
+import poo.tp.app.dto.client.ClientDto;
+import poo.tp.app.dto.client.CreateClientDto;
+import poo.tp.app.dto.client.DeleteClientDto;
+import poo.tp.app.dto.client.UpdateClientDto;
+import poo.tp.app.mapper.ClientMapper;
+import poo.tp.domain.users.exception.ClientAlreadyExistsException;
+import poo.tp.domain.users.exception.ClientNotFoundException;
+import poo.tp.domain.users.model.Client;
+import poo.tp.domain.users.repository.IClientRepository;
+
+public class ClientService {
+  private final IClientRepository clientRepository;
+
+  public ClientService(IClientRepository clientRepository) {
+    this.clientRepository = clientRepository;
+  }
+
+  public void create(CreateClientDto createClientDto) {
+    Client clientFound = clientRepository.findByCPF(createClientDto.getCPF());
+
+    if (clientFound != null) {
+      throw new ClientAlreadyExistsException("Client already exists.");
+    }
+
+    clientRepository.create(clientFound);
+  }
+
+  public void update(UpdateClientDto updateClientDto) {
+    Client clientFound = clientRepository.findByID(updateClientDto.getID());
+
+    if (clientFound == null) {
+      throw new ClientNotFoundException("Client not found.");
+    }
+
+    clientFound.setFirstName(updateClientDto.getFirstName());
+    clientFound.setLastName(updateClientDto.getLastName());
+    clientFound.setMoviesPreferences(updateClientDto.getMoviesPreferences());
+
+    clientRepository.update(clientFound);
+  }
+
+  public void delete(DeleteClientDto deleteClientDto) {
+    Client clientFound = clientRepository.findByID(deleteClientDto.getID());
+
+    if (clientFound == null) {
+      throw new ClientNotFoundException("Client not found.");
+    }
+
+    clientRepository.delete(clientFound.getID());
+  }
+
+  public ClientDto findByID(String ID) {
+    Client clientFound = clientRepository.findByID(ID);
+
+    if (clientFound == null) {
+      return null;
+    }
+
+    return ClientMapper.mapClientEntityToClientDto(clientFound);
+  }
+
+  public ClientDto findByCPF(String CPF) {
+    Client clientFound = clientRepository.findByCPF(CPF);
+
+    if (clientFound == null) {
+      return null;
+    }
+
+    return ClientMapper.mapClientEntityToClientDto(clientFound);
+  }
+
+  public Iterable<ClientDto> findAll() {
+    Iterable<Client> clients = clientRepository.findAll();
+
+    return ClientMapper.mapClientEntitiesToClientDtos(clients);
+  }
+}

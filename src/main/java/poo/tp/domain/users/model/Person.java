@@ -51,10 +51,6 @@ public class Person {
     return CPF;
   }
 
-  public void setCPF(String CPF) {
-    this.CPF = CPF;
-  }
-
   @Override
   public String toString() {
     return "Person{" +
