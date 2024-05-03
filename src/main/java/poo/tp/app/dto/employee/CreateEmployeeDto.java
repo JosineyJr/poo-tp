@@ -1,6 +1,6 @@
 package poo.tp.app.dto.employee;
 
-import poo.tp.domain.auth.model.Role;
+import poo.tp.domain.model.auth.Role;
 
 public class CreateEmployeeDto {
   private String firstName;

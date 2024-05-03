@@ -3,7 +3,7 @@ package poo.tp.infra.db.in_memory;
 import java.util.HashMap;
 import java.util.Map;
 
-import poo.tp.domain.users.repository.IRepository;
+import poo.tp.domain.repository.IRepository;
 
 public abstract class InMemoryCRUDRepository<T> implements IRepository<T> {
   private final Map<String, T> objects = new HashMap<>();
