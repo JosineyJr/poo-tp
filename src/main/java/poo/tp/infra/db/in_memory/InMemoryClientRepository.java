@@ -1,17 +1,18 @@
 package poo.tp.infra.db.in_memory;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import poo.tp.domain.model.users.Client;
 import poo.tp.domain.repository.users.IClientRepository;
 
 public class InMemoryClientRepository extends InMemoryCRUDRepository<Client> implements IClientRepository {
+  private Map<String, Client> clients;
+
   public InMemoryClientRepository() {
     super();
-  }
 
-  private final Map<String, Client> clients = new HashMap<>();
+    this.clients = this.getObjects();
+  }
 
   public Client findByCPF(String CPF) {
     return clients.values().stream().filter(client -> client.getCPF().equals(CPF)).findFirst().orElse(null);

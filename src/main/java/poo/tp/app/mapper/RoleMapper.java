@@ -5,7 +5,7 @@ import java.util.List;
 
 import poo.tp.app.dto.auth.CreateRoleDto;
 import poo.tp.app.dto.auth.RoleDto;
-import poo.tp.domain.auth.model.Role;
+import poo.tp.domain.model.auth.Role;
 
 public class RoleMapper {
   public static RoleDto mapRoleEntityToRoleDto(Role role) {
@@ -16,7 +16,7 @@ public class RoleMapper {
     return new CreateRoleDto(role.getName());
   }
 
-  public static Iterable<RoleDto> mapRoleEntitiesToRoleDtos(Iterable<Role> roles) {
+  public static Iterable<RoleDto> mapRoleEntitiesToRoleDtos(Iterable<poo.tp.domain.model.auth.Role> roles) {
     List<RoleDto> roleDtos = new ArrayList<RoleDto>();
 
     for (Role role : roles) {

@@ -1,49 +1,14 @@
 package poo.tp.domain.repository.auth;
 
 import poo.tp.domain.model.auth.Role;
+import poo.tp.domain.repository.IRepository;
 
-public interface IRoleRepository {
-  /**
-   * Creates a new role in the database.
-   * 
-   * @param role the role entity to save or update
-   */
-  void create(Role role);
-
-  /**
-   * Updates the role in the database.
-   * 
-   * @param role the role entity to save or update`
-   */
-  void update(Role role);
-
-  /**
-   * Deletes the role from the database.
-   * 
-   * @param role the role entity to delete
-   */
-  void delete(Role role);
-
-  /**
-   * Finds a role by its ID.
-   * 
-   * @param ID the ID of the role to find
-   * @return the role entity with the given ID
-   */
-  Role findByID(String ID);
-
+public interface IRoleRepository extends IRepository<Role> {
   /**
    * Finds a role by its name.
    * 
-   * @param name the name of the role to find
-   * @return the role entity with the given name
+   * @param name The name of the role to be found.
+   * @return The role found.
    */
-  Role findByName(String name);
-
-  /**
-   * Finds all roles in the database.
-   * 
-   * @return an iterable of all role entities
-   */
-  Iterable<Role> findAll();
+  public Role findByName(String name);
 }
