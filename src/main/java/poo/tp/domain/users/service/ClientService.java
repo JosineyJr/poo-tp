@@ -22,14 +22,16 @@ public class ClientService {
    * 
    * @param createClientDto
    */
-  public void create(CreateClientDto createClientDto) {
+  public void create(CreateClientDto createClientDto) throws ClientAlreadyExistsException {
     Client clientFound = clientRepository.findByCPF(createClientDto.getCPF());
 
     if (clientFound != null) {
       throw new ClientAlreadyExistsException("Client already exists.");
     }
 
-    clientRepository.create(clientFound);
+    Client client = ClientMapper.mapCreateClientDtoToClientEntity(createClientDto);
+
+    clientRepository.create(client);
   }
 
   /**
@@ -37,7 +39,7 @@ public class ClientService {
    * 
    * @param updateClientDto
    */
-  public void update(UpdateClientDto updateClientDto) {
+  public void update(UpdateClientDto updateClientDto) throws ClientNotFoundException {
     Client clientFound = clientRepository.findByID(updateClientDto.getID());
 
     if (clientFound == null) {
@@ -56,7 +58,7 @@ public class ClientService {
    * 
    * @param deleteClientDto
    */
-  public void delete(DeleteClientDto deleteClientDto) {
+  public void delete(DeleteClientDto deleteClientDto) throws ClientNotFoundException {
     Client clientFound = clientRepository.findByID(deleteClientDto.getID());
 
     if (clientFound == null) {

@@ -4,12 +4,18 @@ import poo.tp.domain.auth.model.Role;
 
 public interface IRoleRepository {
   /**
-   * Saves or updates role in the database.
+   * Creates a new role in the database.
    * 
    * @param role the role entity to save or update
-   * @return the saved or updated role entity
    */
-  Role save(Role role);
+  void create(Role role);
+
+  /**
+   * Updates the role in the database.
+   * 
+   * @param role the role entity to save or update`
+   */
+  void update(Role role);
 
   /**
    * Deletes the role from the database.
