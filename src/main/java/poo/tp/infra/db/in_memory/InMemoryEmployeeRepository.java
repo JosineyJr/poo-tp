@@ -3,8 +3,8 @@ package poo.tp.infra.db.in_memory;
 import java.util.HashMap;
 import java.util.Map;
 
-import poo.tp.domain.users.model.Employee;
-import poo.tp.domain.users.repository.IEmployeeRepository;
+import poo.tp.domain.model.users.Employee;
+import poo.tp.domain.repository.users.IEmployeeRepository;
 
 public class InMemoryEmployeeRepository implements IEmployeeRepository {
   private final Map<String, Employee> employees = new HashMap<>();

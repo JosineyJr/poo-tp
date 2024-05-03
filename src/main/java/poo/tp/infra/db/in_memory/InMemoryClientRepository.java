@@ -3,8 +3,8 @@ package poo.tp.infra.db.in_memory;
 import java.util.HashMap;
 import java.util.Map;
 
-import poo.tp.domain.users.model.Client;
-import poo.tp.domain.users.repository.IClientRepository;
+import poo.tp.domain.model.users.Client;
+import poo.tp.domain.repository.users.IClientRepository;
 
 public class InMemoryClientRepository extends InMemoryCRUDRepository<Client> implements IClientRepository {
   public InMemoryClientRepository() {

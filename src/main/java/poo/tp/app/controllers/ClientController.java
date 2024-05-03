@@ -3,7 +3,7 @@ package poo.tp.app.controllers;
 import java.util.ArrayList;
 
 import poo.tp.app.dto.client.CreateClientDto;
-import poo.tp.domain.users.service.ClientService;
+import poo.tp.domain.service.users.ClientService;
 
 public class ClientController {
   private final ClientService clientService;
