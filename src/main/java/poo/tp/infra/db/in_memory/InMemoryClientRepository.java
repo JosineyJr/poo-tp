@@ -11,6 +11,7 @@ public class InMemoryClientRepository implements IClientRepository {
 
   public void create(Client client) {
     clients.put(client.getID(), client);
+    System.out.println(this.clients.values());
   }
 
   public void update(Client client) {
