@@ -1,5 +1,7 @@
 package poo.tp.domain.model.auth;
 
+import java.util.UUID;
+
 public class Role {
   private String ID;
   private String name;
@@ -10,6 +12,7 @@ public class Role {
   }
 
   public Role(String name) {
+    this.ID = UUID.randomUUID().toString();
     this.name = name;
   }
 

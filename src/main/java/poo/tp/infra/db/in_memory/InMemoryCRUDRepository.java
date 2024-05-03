@@ -8,6 +8,10 @@ import poo.tp.domain.repository.IRepository;
 public abstract class InMemoryCRUDRepository<T> implements IRepository<T> {
   protected final Map<String, T> objects = new HashMap<>();
 
+  public Map<String, T> getObjects() {
+    return objects;
+  }
+
   public void create(String ID, T object) {
     objects.put(ID, object);
   }

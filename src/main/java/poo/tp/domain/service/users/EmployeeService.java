@@ -21,7 +21,7 @@ public class EmployeeService {
    * Create a new employee.
    * 
    * @param createEmployeeDto
-   * @throws EmployeeAlreadyExistsException 
+   * @throws EmployeeAlreadyExistsException
    */
   public void create(CreateEmployeeDto createEmployeeDto) throws EmployeeAlreadyExistsException {
     Employee employeeFound = employeeRepository.findByCPF(createEmployeeDto.getCPF());
@@ -30,17 +30,20 @@ public class EmployeeService {
       throw new EmployeeAlreadyExistsException("Employee already exists.");
     }
 
-    employeeRepository.create(employeeFound);
+    Employee employee = new Employee(createEmployeeDto.getFirstName(), createEmployeeDto.getLastName(),
+        createEmployeeDto.getCPF(), createEmployeeDto.getRole());
+
+    employeeRepository.create(employee.getID(), employee);
   }
 
   /**
    * Update a employee.
    * 
    * @param updateEmployeeDto
-   * @throws EmployeeNotFoundException 
+   * @throws EmployeeNotFoundException
    */
   public void update(UpdateEmployeeDto updateEmployeeDto) throws EmployeeNotFoundException {
-    Employee employeeFound = employeeRepository.findByID(updateEmployeeDto.getID());
+    Employee employeeFound = employeeRepository.read(updateEmployeeDto.getID());
 
     if (employeeFound == null) {
       throw new EmployeeNotFoundException("Employee not found.");
@@ -50,17 +53,17 @@ public class EmployeeService {
     employeeFound.setLastName(updateEmployeeDto.getLastName());
     employeeFound.setRole(updateEmployeeDto.getRole());
 
-    employeeRepository.update(employeeFound);
+    employeeRepository.update(employeeFound.getID(), employeeFound);
   }
 
   /**
    * Delete a employee.
    * 
    * @param deleteEmployeeDto
-   * @throws EmployeeNotFoundException 
+   * @throws EmployeeNotFoundException
    */
   public void delete(DeleteEmployeeDto deleteEmployeeDto) throws EmployeeNotFoundException {
-    Employee employeeFound = employeeRepository.findByID(deleteEmployeeDto.getID());
+    Employee employeeFound = employeeRepository.read(deleteEmployeeDto.getID());
 
     if (employeeFound == null) {
       throw new EmployeeNotFoundException("Employee not found.");
@@ -76,13 +79,13 @@ public class EmployeeService {
    * @return Employee
    */
   public Employee findByID(String ID) {
-    Employee employeeFound = employeeRepository.findByID(ID);
+    Employee employeeFound = employeeRepository.read(ID);
 
     if (employeeFound == null) {
       return null;
     }
 
-    return employeeRepository.findByID(ID);
+    return employeeRepository.read(ID);
   }
 
   /**
@@ -107,7 +110,7 @@ public class EmployeeService {
    * @return List<Employee>
    */
   public Iterable<EmployeeDto> findAll() {
-    Iterable<Employee> employees = employeeRepository.findAll();
+    Iterable<Employee> employees = employeeRepository.list();
 
     return EmployeeMapper.mapEmployeeEntitiesToEmployeeDtos(employees);
   }
