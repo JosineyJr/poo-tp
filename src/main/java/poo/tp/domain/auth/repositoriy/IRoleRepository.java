@@ -2,7 +2,7 @@ package poo.tp.domain.auth.repositoriy;
 
 import poo.tp.domain.auth.model.Role;
 
-public interface RoleRepository {
+public interface IRoleRepository {
   /**
    * Saves or updates role in the database.
    * 
