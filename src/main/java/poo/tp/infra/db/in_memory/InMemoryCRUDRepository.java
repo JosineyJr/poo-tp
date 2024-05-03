@@ -6,7 +6,7 @@ import java.util.Map;
 import poo.tp.domain.repository.IRepository;
 
 public abstract class InMemoryCRUDRepository<T> implements IRepository<T> {
-  private final Map<String, T> objects = new HashMap<>();
+  protected final Map<String, T> objects = new HashMap<>();
 
   public Map<String, T> getObjects() {
     return objects;
