@@ -107,6 +107,6 @@ public class RoleService {
   public Iterable<RoleDto> listAll() {
     Iterable<Role> roles = roleRepository.findAll();
 
-    return RoleMapper.mapRoleEntitiesToCreateRoleDtos(roles);
+    return RoleMapper.mapRoleEntitiesToRoleDtos(roles);
   }
 }
