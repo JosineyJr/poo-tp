@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import poo.tp.app.dto.employee.EmployeeDto;
-import poo.tp.domain.users.model.Employee;
+import poo.tp.domain.model.users.Employee;
 
 public class EmployeeMapper {
   public static EmployeeDto mapEmployeeEntityToEmployeeDto(Employee employee) {

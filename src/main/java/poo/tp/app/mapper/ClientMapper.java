@@ -5,7 +5,7 @@ import java.util.List;
 
 import poo.tp.app.dto.client.ClientDto;
 import poo.tp.app.dto.client.CreateClientDto;
-import poo.tp.domain.users.model.Client;
+import poo.tp.domain.model.users.Client;
 
 public class ClientMapper {
   public static Client mapCreateClientDtoToClientEntity(CreateClientDto client) {
