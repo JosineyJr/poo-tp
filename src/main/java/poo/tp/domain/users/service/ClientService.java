@@ -5,7 +5,7 @@ import poo.tp.app.dto.client.CreateClientDto;
 import poo.tp.app.dto.client.DeleteClientDto;
 import poo.tp.app.dto.client.UpdateClientDto;
 import poo.tp.app.mapper.ClientMapper;
-import poo.tp.domain.users.exception.ClientAlreadyExistsException;
+import poo.tp.domain.users.exception.ClientAlreadyExistsException; // Add this import statement
 import poo.tp.domain.users.exception.ClientNotFoundException;
 import poo.tp.domain.users.model.Client;
 import poo.tp.domain.users.repository.IClientRepository;
@@ -21,24 +21,28 @@ public class ClientService {
    * Create a new client.
    * 
    * @param createClientDto
+   * @throws ClientAlreadyExistsException 
    */
-  public void create(CreateClientDto createClientDto) {
+  public void create(CreateClientDto createClientDto) throws ClientAlreadyExistsException {
     Client clientFound = clientRepository.findByCPF(createClientDto.getCPF());
 
     if (clientFound != null) {
       throw new ClientAlreadyExistsException("Client already exists.");
     }
 
-    clientRepository.create(clientFound);
+    Client client = new Client(createClientDto.getFirstName(), createClientDto.getLastName(), createClientDto.getCPF(), createClientDto.getMoviesPreferences());
+
+    clientRepository.create(client.getID(), client);
   }
 
   /**
    * Update a client.
    * 
    * @param updateClientDto
+   * @throws ClientNotFoundException 
    */
-  public void update(UpdateClientDto updateClientDto) {
-    Client clientFound = clientRepository.findByID(updateClientDto.getID());
+  public void update(UpdateClientDto updateClientDto) throws ClientNotFoundException {
+    Client clientFound = clientRepository.read(updateClientDto.getID());
 
     if (clientFound == null) {
       throw new ClientNotFoundException("Client not found.");
@@ -48,16 +52,17 @@ public class ClientService {
     clientFound.setLastName(updateClientDto.getLastName());
     clientFound.setMoviesPreferences(updateClientDto.getMoviesPreferences());
 
-    clientRepository.update(clientFound);
+    clientRepository.update(clientFound.getID(),clientFound);
   }
 
   /**
    * Delete a client.
    * 
    * @param deleteClientDto
+   * @throws ClientNotFoundException 
    */
-  public void delete(DeleteClientDto deleteClientDto) {
-    Client clientFound = clientRepository.findByID(deleteClientDto.getID());
+  public void delete(DeleteClientDto deleteClientDto) throws ClientNotFoundException {
+    Client clientFound = clientRepository.read(deleteClientDto.getID());
 
     if (clientFound == null) {
       throw new ClientNotFoundException("Client not found.");
@@ -73,7 +78,7 @@ public class ClientService {
    * @return ClientDto
    */
   public ClientDto findByID(String ID) {
-    Client clientFound = clientRepository.findByID(ID);
+    Client clientFound = clientRepository.read(ID);
 
     if (clientFound == null) {
       return null;
@@ -98,7 +103,7 @@ public class ClientService {
    * @return Iterable<ClientDto>
    */
   public Iterable<ClientDto> findAll() {
-    Iterable<Client> clients = clientRepository.findAll();
+    Iterable<Client> clients = clientRepository.list();
 
     return ClientMapper.mapClientEntitiesToClientDtos(clients);
   }
